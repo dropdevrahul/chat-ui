@@ -1,0 +1,38 @@
+<div class='row text-danger'><div class='col-12' style='height: 100px;'>{{error}}</div></div>
+<div class="row row-no-gutter" *ngIf="!authService.getUser()">
+   <div class="col-12 mx-auto login-background">
+      <div class="row login-form-wrapper">
+         <div class="col-md-6">
+            <div class="card login-form">
+               <div class="card-body">
+                  <h2 class="section--heading">Sign in to Your Account</h2>
+                  <form class="form-vertical p1 pt-2">
+                     <div class="form-group col-md-12">
+                        <span><i class="fas fa-user"></i></span>
+                        <input type="text" placeholder="Username" class="form-control form-control-sm" name="model-select" [(ngModel)]="inputUsername" />
+                     </div>
+                     <div class="form-group col-md-12">
+                        <span><i class="fas fa-lock"></i></span>
+                        <input type="password" placeholder="Password" class="form-control form-control-sm" name="model-select" [(ngModel)]="inputPassword"/>
+                     </div>
+                     <div class="form-group col-6">
+                        <button class="btn loginButton" (click)="login($event)">Login</button>
+                     </div>
+                  </form>
+               </div>
+            </div>
+         </div>
+      </div>
+   </div>
+</div>
+<div class="row" *ngIf="authService.getUser()">
+   <div class="col-12">
+      <form class="form-vertical p-1 pt-2">
+         <div class="form-group col-6">
+            <button class="btn btn-danger btn-sm" (click)="logout($event)">
+                Logout
+            </button>
+         </div>
+      </form>
+   </div>
+</div>

@@ -1,0 +1,20 @@
+version: '3.1'
+
+services:
+  ui:
+    build:
+          context: .
+          dockerfile: ./Dockerfile
+    restart: always
+    ports:
+        - 8080:80
+    networks:
+        - apidb
+
+
+networks:
+    apidb:
+        external: true
+
+
+

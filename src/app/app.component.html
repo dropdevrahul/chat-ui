@@ -1,0 +1,39 @@
+<nav class="navbar navbar-dark primary-color navbar-expand-lg main-nav container-fluid">
+  <a class="navbar-brand" href="#">Assignnment App</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav">
+    <!-- *ngIf='authService.getUser()'><-->
+      <li class="nav-item">
+        <a class="nav-link" href="#" *ngIf='authService.getUser()'>Home <span class="sr-only">(current)</span></a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" routerLink="/online-users" *ngIf='authService.getUser()'>Online Users <span class="sr-only">(current)</span></a>
+      </li>
+    </ul>
+     <ul class="navbar-nav">
+        <li class="nav-item dropdown" *ngIf='authService.getUser()'>
+           <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink" data-toggle="dropdown"                                                                     aria-haspopup="true" aria-expanded="false">{{authService.getUser().username}}</a>
+           <div class="dropdown-menu dropdown-primary" aria-labelledby="navbarDropdownMenuLink">
+              <button class="dropdown-item logout-button" (click)='logout()'>Logout <i class='fas fa-sign-out-alt'></i></button>
+           </div>
+        </li>
+     </ul>
+     <!-- Links -->
+     <ul class='navbar-nav ml-auto' *ngIf='!authService.getUser()'>
+        <li class="nav-item">
+           <a routerLink="/login" class='nav-link' routerLinkActive='active' >
+           Login
+           </a>
+        </li>
+     </ul>
+  </div>
+</nav>
+<div class='container h-100'>
+    <div class='content'>
+        <router-outlet></router-outlet>
+    </div>
+</div>
