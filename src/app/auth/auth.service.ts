@@ -27,10 +27,9 @@ export class AuthenticationService {
                 'password': password
                 }).subscribe((result: any)=> {
                     this.currentUser = new User();
+                    this.currentUser.id = result['id'];
                     this.currentUser.token = result['token'];
                     this.currentUser.username = result['username'];
-                    this.currentUser.is_manager = result['is_manager'];
-                    this.currentUser.is_assistant = result['is_assistant'];
                     localStorage.setItem('currentUser', JSON.stringify(this.currentUser))
                     this.router.navigateByUrl(this.returnUrl);
                 }, (error) => {

@@ -3,6 +3,7 @@ import {webSocket, WebSocketSubject} from 'rxjs/webSocket';
 import { ActivatedRoute } from '@angular/router';
 import { ChatRoom } from './chat-room';
 import { UserChatService } from './chat-service.service';
+import { AuthenticationService } from '../auth/auth.service';
 
 @Component({
     selector: 'app-user-chat',
@@ -11,13 +12,16 @@ import { UserChatService } from './chat-service.service';
 })
 export class UserChatComponent implements OnInit {
     websocket: WebSocketSubject<any>;
+    target_username: string = '';
     messages: string[] = [];
     message: string = '';
     id: string = '';
     @Input() room: ChatRoom;
 
     constructor(private route: ActivatedRoute,
-                private chat_service: UserChatService) { }
+                private chat_service: UserChatService,
+                private auth_service: AuthenticationService
+               ) { }
 
     ngOnInit(): void {
         this.route.paramMap.subscribe(params => {
@@ -29,8 +33,15 @@ export class UserChatComponent implements OnInit {
     }
 
     send_message() {
-        this.websocket.next(this.message)
-        this.message = '';
+        if(this.message){
+            let data = {
+                "message": this.message,
+                "current_user_id": this.auth_service.getUser().id
+            }
+            console.log(data)
+            this.websocket.next(data)
+            this.message = '';
+        }
     }
 
     start_chat(target_user_id: string) {
@@ -41,13 +52,22 @@ export class UserChatComponent implements OnInit {
                 this.websocket.asObservable().subscribe(
                     data=>{
                         console.log(data)
-                        this.messages.push(data['message'])
+                        this.messages.push(data)
                     }
                 )
             }, error=>{
                 this.room = null
             }
         )
+    }
+
+    get_message_class(chat_message) {
+        if(String(chat_message.current_user_id) === String(this.auth_service.getUser().id)){
+            return "float-left"
+        }
+        else {
+            return "float-right"
+        }
     }
 
 }

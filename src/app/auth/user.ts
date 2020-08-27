@@ -1,7 +1,6 @@
 export class User {
-    username: String;
-    password: String;
-    is_manager: boolean;
-    is_assistant: boolean;
-    token: String;
+    id: string;
+    username: string;
+    password: string;
+    token: string;
 }

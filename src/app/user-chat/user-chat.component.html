@@ -1,10 +1,16 @@
-<div class="row">
-    <div class='col-12'>
-        <p *ngFor="let mess of messages">
-            {{mess}}
-        </p>
-    <input type='text' [(ngModel)]="message">
-    <button class='btn btn-primary-xs' (click)="send_message()">Send</button>
+<div class="row ">
+    <div class="card col-12 text-white bg-dark vh-100">
+        <div class='card-body'>
+            <h5 class="card-title">Chat with {{room.target_username}}</h5>
+            <input type='text' [(ngModel)]="message">
+            <button class='btn btn-primary btn-sm' (click)="send_message()">Send</button>
+        <ul class="list-group list-group-flush ">
+            <li class="list-group-item text-white bg-dark " *ngFor="let message of messages" >
+                <span [ngClass]="get_message_class(message) + ' p-2 text-white bg-primary'" style="border-radius:24%;"
+                                                                                            >{{message.message}}</span>
+
+            </li>
+        </ul>
+        </div>
     </div>
-</div>
 

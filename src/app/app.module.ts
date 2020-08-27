@@ -37,7 +37,6 @@ const appRoutes: Routes = [
     FormsModule,
     AppRoutingModule,
     HttpClientModule,
-    UserIdleModule.forRoot({idle: 20, timeout: 300, ping: 120})
   ],
     providers: [
       AuthGuard,
