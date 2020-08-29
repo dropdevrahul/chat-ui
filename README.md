@@ -1,5 +1,10 @@
 ### Instructions
 
+A simple frontend in Angular for websocket based chat service.
+
+Also includes token based authentication and websocket authentication via subprotocols.
+
+
 * Install nodejs from the official website
 
 * Install npm dependencies with this command
